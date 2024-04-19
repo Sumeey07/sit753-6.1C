@@ -25,6 +25,20 @@ pipeline {
             echo 'Task: Perform a security scan'
             echo 'Tool: OWASP ZAP'
         }
+        post {
+          success {
+              echo 'Security Scan Successful. Sending notification email.'
+              // Send email notification for successful security scan
+              // Include logs as attachment
+              // command to send email
+          }
+          failure {
+            echo 'Security Scan Failed. Sending notification email.'
+            //  Send email notification for failed security scan
+            // Include logs as attachment
+            // command to send email
+          }
+        }
       }
       stage('Deploy to Staging') {
         steps {
@@ -49,9 +63,15 @@ pipeline {
   post {
     success {
         echo 'Notification: Build Successful. Email sent.'
+        // Send email notification for successful build
+        // Include logs as attachment
+        // command to send email
     }
     failure {
         echo 'Notification: Build Failed. Email sent.' 
+        // Send email notification for failed build
+        // Include logs as attachment
+        // command to send email
     }
   }
 }
