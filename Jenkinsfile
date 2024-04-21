@@ -26,22 +26,14 @@ pipeline {
             echo 'Tool: OWASP ZAP'
         }
         post {
-            always {
-              emailext (
-                subject: "Pipeline status: ${currentBuild.result}",
-                body: '''<html>
-                            <body>
-                                <p>Build Status: ${currentBuild.result}</p>
-                                <p>Build Number: ${currentBuild.number}</p>
-                                <p>Check the <a href="${env.BUILD_URL}">console output</a>.</p>
-                            </body>
-                        </html>''',
-                to: 'narwani.sumeet92@gmail.com',
-                from: 'jenkins@example.com',
-                replyTo: 'jenkins@example.com',
-                mimeType: 'text/html'
-              )
-            }
+          success {
+              echo 'Security Scan Successful. Sending notification email.'
+              emailext to: 'narwani.sumeet92@gmail.com', subject: 'Security Scan Successful', body: 'The security scan was successful. Logs attached.', attachmentsPattern: '**/*.log'
+          }
+          failure {
+            echo 'Security Scan Failed. Sending notification email.'
+            emailext to: 'narwani.sumeet92@gmail.com', subject: 'Security Scan Failed', body: 'The security scan failed. Logs attached.', attachmentsPattern: '**/*.log'
+          }
         }
       }
       stage('Deploy to Staging') {
@@ -62,5 +54,16 @@ pipeline {
             echo 'Tool: AWS CodeDeploy'
         }
       }
+  }
+
+  post {
+    success {
+        echo 'Notification: Build Successful. Email sent.'
+        emailext to: 'narwani.sumeet92@gmail.com', subject: 'Build Successful', body: 'The build was successful. Logs attached.', attachmentsPattern: '**/*.log'
+    }
+    failure {
+        echo 'Notification: Build Failed. Email sent.' 
+        emailext to: 'narwani.sumeet92@gmail.com', subject: 'Build Failed', body: 'The build failed. Logs attached.', attachmentsPattern: '**/*.log'
+    }
   }
 }
