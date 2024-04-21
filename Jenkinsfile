@@ -28,19 +28,11 @@ pipeline {
         post {
           success {
               echo 'Security Scan Successful. Sending notification email.'
-              script {
-                def logFile = 'security_scan_log.txt'
-                currentBuild.rawBuild.getLog(1000).writeTo(logFile)
-                emailext to: 'narwani.sumeet92@gmail.com', subject: 'Security Scan Successful', body: 'The security scan was successful. Console output attached.', attachmentsPattern: logFile
-              }
+              emailext to: 'narwani.sumeet92@gmail.com', subject: 'Security Scan Successful', body: 'The security scan was successful. Logs attached.', attachmentsPattern: '**/*.log'
           }
           failure {
             echo 'Security Scan Failed. Sending notification email.'
-            script {
-              def logFile = 'security_scan_log.txt'
-              currentBuild.rawBuild.getLog(1000).writeTo(logFile)
-              emailext to: 'narwani.sumeet92@gmail.com', subject: 'Security Scan Failed', body: 'The security scan failed. Console output attached.', attachmentsPattern: logFile
-            }
+            emailext to: 'narwani.sumeet92@gmail.com', subject: 'Security Scan Failed', body: 'The security scan failed. Logs attached.', attachmentsPattern: '**/*.log'
           }
         }
       }
@@ -67,19 +59,11 @@ pipeline {
   post {
     success {
         echo 'Notification: Build Successful. Email sent.'
-        script {
-          def logFile = 'build_log.txt'
-          currentBuild.rawBuild.getLog(1000).writeTo(logFile)
-          emailext to: 'narwani.sumeet92@gmail.com', subject: 'Build Successful', body: 'The build was successful. Console output attached.', attachmentsPattern: logFile
-        }
+        emailext to: 'narwani.sumeet92@gmail.com', subject: 'Build Successful', body: 'The build was successful. Logs attached.', attachmentsPattern: '**/*.log'
     }
     failure {
         echo 'Notification: Build Failed. Email sent.' 
-        script {
-          def logFile = 'build_log.txt'
-          currentBuild.rawBuild.getLog(1000).writeTo(logFile)
-          emailext to: 'narwani.sumeet92@gmail.com', subject: 'Build Failed', body: 'The build failed. Console output attached.', attachmentsPattern: logFile
-        }
+        emailext to: 'narwani.sumeet92@gmail.com', subject: 'Build Failed', body: 'The build failed. Logs attached.', attachmentsPattern: '**/*.log'
     }
   }
 }
