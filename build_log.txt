@@ -1,0 +1,107 @@
+Started by user Sumeet Kumar
+Obtained Jenkinsfile from git https://github.com/Sumeey07/sit753-6.1C.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in C:\ProgramData\Jenkins\.jenkins\workspace\My_Second_Pipeline
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/Sumeey07/sit753-6.1C.git
+ > git.exe init C:\ProgramData\Jenkins\.jenkins\workspace\My_Second_Pipeline # timeout=10
+Fetching upstream changes from https://github.com/Sumeey07/sit753-6.1C.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.44.0.windows.1'
+ > git.exe fetch --tags --force --progress -- https://github.com/Sumeey07/sit753-6.1C.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe config remote.origin.url https://github.com/Sumeey07/sit753-6.1C.git # timeout=10
+ > git.exe config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+Checking out Revision 04127c8df2b7e28a17fb077777584225e97c5b4a (refs/remotes/origin/main)
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 04127c8df2b7e28a17fb077777584225e97c5b4a # timeout=10
+Commit message: "final edit"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] echo
+Task: Build the code using a build automation tool
+[Pipeline] echo
+Tool: Maven
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Unit and Integration Tests)
+[Pipeline] echo
+Task: Run unit tests and integration tests
+[Pipeline] echo
+Tools: JUnit for unit tests, Selenium for integration tests
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Code Analysis)
+[Pipeline] echo
+Task: Integrate a code analysis tool
+[Pipeline] echo
+Tool: SonarQube
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Security Scan)
+[Pipeline] echo
+Task: Perform a security scan
+[Pipeline] echo
+Tool: OWASP ZAP
+Post stage
+[Pipeline] echo
+Security Scan Successful. Sending notification email.
+[Pipeline] emailext
+Sending email to: narwani.sumeet92@gmail.com
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to Staging)
+[Pipeline] echo
+Task: Deploy the application to a staging server
+[Pipeline] echo
+Tool: AWS CodeDeploy
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Integration Tests on Staging)
+[Pipeline] echo
+Task: Run integration tests on the staging environment
+[Pipeline] echo
+Tool: Selenium
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to Production)
+[Pipeline] echo
+Task: Deploy the application to a production server
+[Pipeline] echo
+Tool: AWS CodeDeploy
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+Notification: Build Successful. Email sent.
+[Pipeline] emailext
+Sending email to: narwani.sumeet92@gmail.com
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
