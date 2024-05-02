@@ -28,11 +28,11 @@ pipeline {
         post {
           success {
               echo 'Security Scan Successful. Sending notification email.'
-              emailext to: 'narwani.sumeet92@gmail.com', subject: 'Security Scan Successful', body: 'The security scan was successful. Logs attached.', attachmentsPattern: '**/*.log'
+              emailext to: 'narwani.sumeet92@gmail.com', subject: 'Security Scan Successful', body: 'The security scan was successful. Logs attached.', attachmentsPattern: '**/*.log', attachLog: true
           }
           failure {
             echo 'Security Scan Failed. Sending notification email.'
-            emailext to: 'narwani.sumeet92@gmail.com', subject: 'Security Scan Failed', body: 'The security scan failed. Logs attached.', attachmentsPattern: '**/*.log'
+            emailext to: 'narwani.sumeet92@gmail.com', subject: 'Security Scan Failed', body: 'The security scan failed. Logs attached.', attachmentsPattern: '**/*.log', attachLog: true
           }
         }
       }
@@ -59,11 +59,11 @@ pipeline {
   post {
     success {
         echo 'Notification: Build Successful. Email sent.'
-        emailext to: 'narwani.sumeet92@gmail.com', subject: 'Build Successful', body: 'The build was successful. Logs attached.', attachmentsPattern: '**/*.log'
+        emailext to: 'narwani.sumeet92@gmail.com', subject: 'Build Successful', body: 'The build was successful. Logs attached.', attachmentsPattern: '**/*.log', attachLog: true
     }
     failure {
         echo 'Notification: Build Failed. Email sent.' 
-        emailext to: 'narwani.sumeet92@gmail.com', subject: 'Build Failed', body: 'The build failed. Logs attached.', attachmentsPattern: '**/*.log'
+        emailext to: 'narwani.sumeet92@gmail.com', subject: 'Build Failed', body: 'The build failed. Logs attached.', attachmentsPattern: '**/*.log', attachLog: true
     }
   }
 }
